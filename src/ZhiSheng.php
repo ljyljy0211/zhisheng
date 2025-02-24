@@ -14,7 +14,7 @@ class ZhiSheng extends Foundation
 
     public function request($method, $params)
     {
-        $api = new Api($this->config['app_key'], $this->config['app_secret'], $this->config['token'], $this->config['base_url']);
+        $api = new Api($this->config['app_key'], $this->config['app_secret'], $this->config['access_token'], $this->config['base_url']);
 
         return $api->request($method, $params);
     }
