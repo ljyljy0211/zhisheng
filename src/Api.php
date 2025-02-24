@@ -10,15 +10,15 @@ class Api extends AbstractAPI
 
     private $appSecret;
 
-    private $token;
+    private $accessToken;
 
     private $baseUrl;
 
-    public function __construct($appKey, $appSecret, $token, $baseUrl)
+    public function __construct($appKey, $appSecret, $accessToken, $baseUrl)
     {
         $this->appKey = $appKey;
         $this->appSecret = $appSecret;
-        $this->token = $token;
+        $this->accessToken = $accessToken;
         $this->baseUrl = rtrim($baseUrl, '/');
     }
 
@@ -51,7 +51,7 @@ class Api extends AbstractAPI
             'timestamp' => time(),
             'charset' => 'utf-8',
             'version' => '1',
-            'token' => $this->token,
+            'token' => $this->accessToken,
         ];
     }
 

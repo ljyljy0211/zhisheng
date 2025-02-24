@@ -1,11 +1,11 @@
-# kuaimai 快麦SDK
+# 会员频道吱声SDK
 
-[https://open-doc.kuaimai.com](https://open-doc.kuaimai.com "快麦开放平台api文档")
+[https://shenghuohao.yuque.com/vtztm0/asg3ce/fqaknx45vqi4gzvg?singleDoc#wFCXj](https://shenghuohao.yuque.com/vtztm0/asg3ce/fqaknx45vqi4gzvg?singleDoc#wFCXj "吱声会员频道自建erp的api文档")
 
 ## 安装
 
 ```shell
-$ composer require yihaitao/kuaimai -vvv
+$ composer require yihaitao/zhisheng -vvv
 ```
 
 ## 使用
@@ -13,22 +13,22 @@ $ composer require yihaitao/kuaimai -vvv
 ```php
 <?php
 
-use YiHaiTao\KuaiMai\KuaiMai;
+use YiHaiTao\ZhiSheng\ZhiSheng;
 
 $config = [
     'app_key' => 'your-key',
     'app_secret' => 'your-secret',
     'access_token' => 'your-access-token',
-    'base_url' => 'https://gw.superboss.cc/router',
+    'base_url' => 'https://service-api.shop.zhisheng.com/api/fmcg/erp',
 ];
 
-// 实例化快麦sdk
-$km = new KuaiMai($config);
+// 实例化吱声sdk
+$erp = new ZhiSheng($config);
 // 使用如下
-$km->request('method', $params);
+$erp->request('method', $params);
 
 // 例子
-$result = $km->request('erp.trade.create.new', $params);
+$result = $erp->request('ju-hui-order-list', $params);
 print_r($result);
 ```
 
