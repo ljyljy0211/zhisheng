@@ -18,4 +18,11 @@ class ZhiSheng extends Foundation
 
         return $api->request($method, $params);
     }
+
+    public function verifySign(array $params)
+    {
+        $api = new Api($this->config['app_key'], $this->config['app_secret'], $this->config['access_token'], $this->config['base_url']);
+
+        return $api->verifySign($params);
+    }
 }

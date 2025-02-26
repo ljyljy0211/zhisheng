@@ -41,6 +41,45 @@ class Api extends AbstractAPI
         return json_decode($response->getBody(), true);
     }
 
+    /**
+     * 验证请求签名
+     *
+     * @param  array  $params  请求参数
+     * @param  string  $appSecret  应用密钥
+     * @return bool 签名是否有效
+     */
+    public function verifySign(array $params): bool
+    {
+        // 验证必要参数
+        if (empty($params['sign']) || empty($params['app_key']) ||
+            empty($params['timestamp']) || empty($params['biz'])) {
+            return false;
+        }
+
+        // 获取请求中的签名
+        $sign = $params['sign'];
+
+        // 按字典序排序参数
+        $data = $params;
+        unset($data['sign']); // 去掉签名参数
+        ksort($data);
+
+        // 拼接参数
+        $str = '';
+        foreach ($data as $key => $val) {
+            if ($key != null && $key != '') {
+                $str .= $key.$val;
+            }
+        }
+
+        // 在首尾加上appSecret并转小写
+        $str = $this->appSecret.$str.$this->appSecret;
+        $str = strtolower($str);
+
+        // 计算MD5并比较
+        return md5($str) === $sign;
+    }
+
     /*
      * 封装公共请求参数
      */
@@ -64,7 +103,7 @@ class Api extends AbstractAPI
         if ($data == null) {
             return null;
         }
-        //签名步骤一：按字典序排序参数
+        // 签名步骤一：按字典序排序参数
         ksort($data);
         $resultStr = '';
         foreach ($data as $key => $val) {
